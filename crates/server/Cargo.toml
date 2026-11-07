@@ -1,0 +1,23 @@
+[package]
+name = "yandex-mcp-server"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[[bin]]
+name = "yandex-mcp"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+# Used directly in tools.rs to classify provider errors into the unified
+# `{kind, message}` error form (timeout / connection_error / http_error / …).
+reqwest = { workspace = true }
+
+yandex-mcp-provider = { path = "../providers/yandex" }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
